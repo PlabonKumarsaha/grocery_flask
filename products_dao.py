@@ -23,6 +23,18 @@ def get_all_products(connection):
     # cnx.close()
     return response;
 
+def insert_new_product(connection, product):
+    cursor = connection.cursor()
+    query = ("INSERT INTO gs.produts(name,UOM_id,price_per_unit)"
+             "VALUES(%s,%s,%s)")
+    name = product['name'];
+    uom = product['UOM_id']
+    price = product['price_per_unit']
+    cursor.execute(query, (name, uom, price))
+    connection.commit()
+
+    return cursor.lastrowid
+
 
 def insert_new_product(connection, product):
     cursor = connection.cursor()
