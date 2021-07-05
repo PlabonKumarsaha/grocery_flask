@@ -1,5 +1,5 @@
 import mysql.connector
-
+# __cnx means global variable
 __cnx = None
 def get_sql_connection():
     global __cnx
