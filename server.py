@@ -11,12 +11,22 @@ def hello():
     return "hello!how"
 
 
+@app.route('/deleteProduct', methods=['POST'])
+def delete_product():
+    retrun_id = products_dao.delete_product(connection, request.form['product_id'])
+    response = jsonify({
+        'product_id' : retrun_id
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
 @app.route('/getProducts', methods=['GET'])
 def get_products():
     products = products_dao.get_all_products(connection)
     response = jsonify(products)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
+
 
 
 if __name__ == '__main__':
